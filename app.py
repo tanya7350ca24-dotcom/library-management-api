@@ -4,6 +4,6 @@ def home():
         cur = mysql.connection.cursor()
         cur.execute("SELECT 1")
         cur.close()
-        return "Flask → MySQL connection SUCCESS 🚀"
+        return "SUCCESS: Flask connected to MySQL 🚀"
     except Exception as e:
-        return f"Connection failed: {str(e)}"
+        return f"FAILED: {str(e)}"
