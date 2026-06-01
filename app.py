@@ -3,11 +3,10 @@ import mysql.connector
 
 app = Flask(__name__)
 
-
 DB_CONFIG = {
     "host": "127.0.0.1",
     "user": "root",
-    "password": "Student",  
+    "password": "Student",
     "database": "library_db"
 }
 
