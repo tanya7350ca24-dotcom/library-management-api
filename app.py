@@ -10,28 +10,20 @@ DB_CONFIG = {
     "database": "library_db"
 }
 
-
 @app.route('/')
 def home():
     try:
         conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
-
         cursor.execute("SELECT 1")
-        result = cursor.fetchone()  
-
+        result = cursor.fetchone()
         cursor.close()
         conn.close()
 
-        return jsonify({
-            "message": "Flask + MySQL working 🚀",
-            "result": result
-        })
+        return f"SUCCESS: {result}"
 
     except Exception as e:
-        return jsonify({
-            "error": str(e)
-        })
+        return f"MYSQL ERROR: {str(e)}"
 
 
 
