@@ -1,22 +1,24 @@
 from flask import Flask, jsonify
-from flask_mysqldb import MySQL
+import mysql.connector
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = '127.0.0.1'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Student'
-app.config['MYSQL_DB'] = 'library_db'
-
-mysql = MySQL(app)
+db_config = {
+    "host": "127.0.0.1",
+    "user": "root",
+    "password": "Student",
+    "database": "library_db"
+}
 
 @app.route('/')
 def home():
     try:
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT 1")
-        cur.close()
-        return "Flask + MySQL working 🚀"
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1")
+        cursor.close()
+        conn.close()
+        return "Flask + MySQL CONNECTED 🚀"
     except Exception as e:
         return str(e)
 
